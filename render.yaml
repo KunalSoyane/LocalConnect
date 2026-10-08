@@ -3,5 +3,5 @@ services:
     name: localconnect
     runtime: node
     plan: free
-    buildCommand: npm install
+    buildCommand: npm install && npm --prefix frontend install && npm --prefix frontend run build
     startCommand: npm start

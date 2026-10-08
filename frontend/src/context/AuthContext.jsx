@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 
 const AuthContext = createContext(null);
 
-// Axios base URL
-axios.defaults.baseURL = 'http://localhost:5000';
+// Use the current origin in production and allow a local API override in development.
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || '';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
