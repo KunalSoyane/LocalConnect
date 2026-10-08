@@ -1,0 +1,29 @@
+.my-bookings-page { padding: 2.5rem 0 4rem; min-height: 100vh; }
+.page-title-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 2rem; }
+.page-title-row h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+.page-title-row p { color: var(--text-secondary); }
+.status-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+.status-tab { padding: 0.5rem 1rem; border-radius: var(--radius-full); border: 1.5px solid var(--border-color); background: none; color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: var(--transition-fast); text-transform: capitalize; }
+.status-tab:hover { border-color: var(--border-color-hover); color: var(--text-primary); }
+.status-tab.active { background: var(--primary-600); border-color: var(--primary-600); color: #fff; }
+.bookings-list { display: flex; flex-direction: column; gap: 1rem; }
+.booking-item { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.booking-item-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.booking-service-info-row { display: flex; align-items: center; gap: 0.875rem; }
+.booking-service-avatar { width: 48px; height: 48px; background: rgba(99,102,241,0.15); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; color: var(--primary-400); flex-shrink: 0; }
+.booking-service-info-row h3 { font-size: 1.0625rem; margin-bottom: 0.125rem; }
+.booking-service-info-row p { font-size: 0.875rem; color: var(--text-secondary); }
+.booking-details-row { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.booking-detail { display: flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--text-secondary); }
+.booking-price-tag { margin-left: auto; font-size: 1.0625rem; font-weight: 700; color: var(--primary-400); }
+.booking-notes { font-size: 0.875rem; color: var(--text-secondary); background: var(--bg-tertiary); padding: 0.75rem; border-radius: var(--radius-md); display: flex; align-items: flex-start; gap: 0.5rem; }
+.booking-actions { display: flex; align-items: center; gap: 0.75rem; padding-top: 0.5rem; border-top: 1px solid var(--divider); }
+.booking-id { margin-left: auto; font-size: 0.8rem; color: var(--text-muted); font-family: monospace; }
+
+/* Review Modal */
+.review-service-name { font-weight: 600; color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9375rem; }
+.star-selector { display: flex; align-items: center; gap: 0.25rem; margin-bottom: 1.25rem; }
+.star-btn { background: none; border: none; cursor: pointer; padding: 0.125rem; transition: transform 0.1s ease; }
+.star-btn:hover { transform: scale(1.15); }
+.rating-label { margin-left: 0.75rem; font-weight: 600; color: var(--warning-400); font-size: 0.9rem; }
+.spin { animation: spin 1s linear infinite; }

@@ -1,0 +1,59 @@
+.service-detail-page { padding: 2rem 0 4rem; }
+.service-detail-grid { display: grid; grid-template-columns: 1fr 360px; gap: 2rem; align-items: start; }
+
+.service-detail-content { display: flex; flex-direction: column; gap: 2rem; }
+
+.service-detail-image { position: relative; border-radius: var(--radius-lg); overflow: hidden; height: 360px; background: var(--bg-tertiary); }
+.service-detail-image img { width: 100%; height: 100%; object-fit: cover; }
+.service-detail-image .service-badge { position: absolute; top: 1rem; left: 1rem; font-size: 0.875rem; padding: 0.375rem 0.875rem; }
+
+.detail-header { display: flex; flex-direction: column; gap: 0.75rem; }
+.detail-header h1 { font-size: 1.875rem; }
+.detail-meta { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.detail-rating { display: flex; align-items: center; gap: 0.5rem; }
+.detail-location { display: flex; align-items: center; gap: 0.375rem; font-size: 0.9rem; color: var(--text-secondary); }
+
+.detail-desc { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.75rem; }
+.detail-desc h3 { margin-bottom: 1rem; }
+.detail-desc p { line-height: 1.8; }
+
+.detail-reviews { display: flex; flex-direction: column; gap: 1rem; }
+.detail-reviews h3 { font-size: 1.25rem; }
+.no-reviews { color: var(--text-muted); font-style: italic; }
+.reviews-list { display: flex; flex-direction: column; gap: 1rem; }
+.review-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem; }
+.review-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.reviewer-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary-600), var(--accent-600)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; color: #fff; flex-shrink: 0; }
+.review-date { margin-left: auto; font-size: 0.8125rem; color: var(--text-muted); }
+.review-comment { font-size: 0.9rem; color: var(--text-secondary); }
+
+/* Sidebar */
+.service-detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; position: sticky; top: calc(var(--navbar-height) + 2rem); }
+.provider-card { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+.provider-card h3 { font-size: 1rem; }
+.provider-profile { display: flex; align-items: center; gap: 1rem; }
+.provider-avatar-lg { width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary-500), var(--accent-500)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; color: #fff; overflow: hidden; flex-shrink: 0; }
+.provider-avatar-lg img { width: 100%; height: 100%; object-fit: cover; }
+.provider-name-row { display: flex; align-items: center; gap: 0.375rem; }
+.verified-icon { color: var(--success-400); }
+.provider-category { font-size: 0.8125rem; color: var(--text-muted); }
+.provider-bio { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+.provider-stats { display: flex; gap: 1rem; flex-wrap: wrap; }
+.p-stat { display: flex; flex-direction: column; gap: 0.125rem; font-size: 0.8rem; color: var(--text-muted); }
+.p-stat-val { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+
+.booking-card { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.booking-price-row { display: flex; align-items: baseline; gap: 0.125rem; }
+.booking-price-amount { font-size: 2rem; font-weight: 900; color: var(--text-primary); }
+.booking-success { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1rem; background: rgba(16,185,129,0.08); border-radius: var(--radius-md); text-align: center; }
+.booking-success p { font-size: 0.875rem; color: var(--success-400); }
+
+.booking-modal { max-width: 540px; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.modal-header h3 { font-size: 1.25rem; }
+.booking-service-info { display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem; background: var(--bg-tertiary); border-radius: var(--radius-md); margin-bottom: 1.25rem; flex-wrap: wrap; }
+.booking-price { margin-left: auto; font-weight: 700; color: var(--primary-400); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+.spin { animation: spin 1s linear infinite; }
+
+@media (max-width: 1024px) { .service-detail-grid { grid-template-columns: 1fr; } .service-detail-sidebar { position: static; } }
