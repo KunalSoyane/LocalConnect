@@ -69,7 +69,7 @@ const frontendPath = path.join(__dirname, 'frontend', 'dist');
 if (fs.existsSync(frontendPath)) {
   // If Vite build output exists in /frontend/dist
   app.use(express.static(frontendPath));
-  app.get('*', (req, res) => {
+  app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(frontendPath, 'index.html'));
   });
 } else {
