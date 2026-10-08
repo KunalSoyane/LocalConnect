@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 
-// Import routes
+// Import API routes
 const authRoutes = require('./routes/auth');
 const serviceRoutes = require('./routes/services');
 const bookingRoutes = require('./routes/bookings');
@@ -16,39 +16,35 @@ const aiRoutes = require('./routes/ai');
 
 const app = express();
 
-// ── Experiment 7: Node.js File System / Streams ──────────────────────────────
-// Ensure logs directory exists
+// ── Node.js Logging Setup ──────────────────────────────────────────────────
 const logsDir = path.join(__dirname, 'logs');
 if (!fs.existsSync(logsDir)) fs.mkdirSync(logsDir);
 
-// Write stream for booking logs (Streams & Buffers demo)
 const accessLogStream = fs.createWriteStream(
   path.join(logsDir, 'bookings.log'),
   { flags: 'a' }
 );
 
-// Expose log stream to route handlers via app.locals
 app.locals.logStream = accessLogStream;
 
-// Morgan HTTP request logger using stream
 app.use(morgan('combined', { stream: accessLogStream }));
-app.use(morgan('dev')); // also log to console
+app.use(morgan('dev'));
 
 // ── Middleware ────────────────────────────────────────────────────────────────
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: ['http://localhost:5173', 'http://localhost:3000', 'https://localconnect-mhkn.onrender.com'],
   credentials: true,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ── Database ──────────────────────────────────────────────────────────────────
+// ── Database Connection ───────────────────────────────────────────────────────
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB Connected'))
   .catch((err) => console.error('❌ MongoDB Error:', err.message));
 
-// ── Routes ────────────────────────────────────────────────────────────────────
+// ── API Routes ────────────────────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/bookings', bookingRoutes);
@@ -56,11 +52,44 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/ai', aiRoutes);
 
-// Health check
+// Health check endpoint
 app.get('/api/health', (req, res) => {
   const dbConnected = mongoose.connection.readyState === 1;
-  res.json({ status: 'ok', dbConnected, timestamp: new Date().toISOString(), service: 'LocalConnect API' });
+  res.json({
+    status: 'ok',
+    dbConnected,
+    timestamp: new Date().toISOString(),
+    service: 'LocalConnect API',
+  });
 });
+
+// ── Serve Frontend or Root Health Response ──────────────────────────────────
+const frontendPath = path.join(__dirname, 'frontend', 'dist');
+
+if (fs.existsSync(frontendPath)) {
+  // If Vite build output exists in /frontend/dist
+  app.use(express.static(frontendPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+  });
+} else {
+  // Root API response (Fixes "Cannot GET /" when accessing primary URL)
+  app.get('/', (req, res) => {
+    res.status(200).json({
+      success: true,
+      message: '🚀 LocalConnect API is live and running',
+      endpoints: {
+        auth: '/api/auth',
+        services: '/api/services',
+        bookings: '/api/bookings',
+        reviews: '/api/reviews',
+        users: '/api/users',
+        ai: '/api/ai',
+        health: '/api/health',
+      },
+    });
+  });
+}
 
 // ── Global Error Handler ──────────────────────────────────────────────────────
 app.use((err, req, res, next) => {
@@ -72,10 +101,9 @@ app.use((err, req, res, next) => {
 });
 
 // ── Start Server ──────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`🚀 LocalConnect API running on http://localhost:${PORT}`);
-  // Experiment 7: Write startup event to log using Buffer
   const startMsg = Buffer.from(`[${new Date().toISOString()}] Server started on port ${PORT}\n`);
   accessLogStream.write(startMsg);
 });
